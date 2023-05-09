@@ -1,0 +1,54 @@
+1. Вывести все жанры
+
+In [2]: genre = models.Genre.objects.filter()
+In [3]: genre.all()
+Out[3]: <QuerySet [<Genre: Комедия>, <Genre: Драма>, <Genre: Роман>]>
+
+2. Вывести имена и фамилии всех авторов
+
+In [4]: models.Author.objects.filter()
+Out[4]: <QuerySet [<Author: Чехов, Антон>, <Author: Пушкин, Александр>, <Author: Толстой, Лев>]>
+
+3. Вывести авторов, родившихся после 18 века
+
+In [5]: models.Author.objects.filter(date_of_birth__gte="1800-01-01")
+Out[5]: <QuerySet [<Author: Чехов, Антон>, <Author: Толстой, Лев>]>
+
+
+4. Вывести авторов, умерших до 19 века
+
+In [6]: models.Author.objects.filter(date_of_death__lte="1900-01-01")
+Out[6]: <QuerySet [<Author: Пушкин, Александр>]>
+
+
+5. Вывести название книги авторства А.Пушкина (id автора - 2)
+
+In [7]: book = models.Book.objects.filter(author="2")
+In [8]: book.all()
+Out[8]: <QuerySet [<Book: Повести Белкина>]>
+
+6. Вывести количество книг, записанных в БД
+
+In [9]: models.Book.objects.filter().count()
+Out[9]: 3
+
+8. Вывести книги, название которых содержит "П"
+
+In [10]: models.Book.objects.exclude(title__contains="П")
+Out[10]: <QuerySet [<Book: Юмористические рассказы>, <Book: Война и Мир>]>
+
+9. Вывести книгу, с названием "Повести Белкина"
+
+In [12]: models.Book.objects.filter(title__contains="Повести Белкина")
+Out[12]: <QuerySet [<Book: Повести Белкина>]>
+
+9. Вывести книги в жанре "Комедия" (id жанра - 18)
+
+In [23]: models.Book.objects.filter(genre="18")
+Out[23]: <QuerySet [<Book: Юмористические рассказы>]>
+
+10. Вывести книги в жанре "Роман" (id жанра - 20)
+
+In [23]: models.Book.objects.filter(genre="20")
+Out[23]: <QuerySet [<Book: Война и Мир>]>
+
