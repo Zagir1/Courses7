@@ -5,9 +5,8 @@
     </head>
     <body>
         <style>
-             body {
-             background: #E0FFFF
-             }
+             body { background: #E0FFFF }
+             button { background: #AFEEEE }
          </style>
     <nav class="navbar navbar-dark bg-success">
       <div class="container-fluid">
@@ -18,7 +17,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="http://127.0.0.1:8000">Домашняя страница</a>
+              <a class="nav-link active" aria-current="page" href="{% url 'core:home' %}">Домашняя страница</a>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -26,11 +25,11 @@
               </a>
               <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="/admin/">Админ-панель</a></li>
-                <li><a class="dropdown-item" href="http://127.0.0.1:8000/book_list/">Список книг</a></li>
+                <li><a class="dropdown-item" href="{% url 'core:book_list' %}">Список книг</a></li>
                 <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="http://127.0.0.1:8000/author_detail/1">Информация о писателе (Чехов А.)</a></li>
-                <li><a class="dropdown-item" href="http://127.0.0.1:8000/author_detail/2">Информация о писателе (Пушкин А.)</a></li>
-                <li><a class="dropdown-item" href="http://127.0.0.1:8000/author_detail/3">Информация о писателе (Толстой Л.)</a></li>
+                <li><a class="dropdown-item" href="{% url 'core:author' pk=1 %}">Информация о писателе (Чехов А.)</a></li>
+                <li><a class="dropdown-item" href="{% url 'core:author' pk=2 %}">Информация о писателе (Пушкин А.)</a></li>
+                <li><a class="dropdown-item" href="{% url 'core:author' pk=3 %}">Информация о писателе (Толстой Л.)</a></li>
               </ul>
             </li>
           </ul>

@@ -3,6 +3,11 @@
     <title>{{title}}</title>
     <body>
     <h1> Список всех книг: {{count}}</h1>
+    <form method="GET">
+        {{ form }}
+        <button type="submit">Поиск</button>
+    </form>
+    <h6>Примечание для поиска: оба поля должны быть заполнены!</h6>
     <table class="table">
       <thead>
         <tr>
@@ -10,7 +15,10 @@
           <th scope="col">Название книги</th>
           <th scope="col">Автор произведения</th>
           <th scope="col">Жанр</th>
+          <th scope="col">Кол-во рецензий критиков</th>
           <th scope="col">Краткое описание</th>
+          <th scope="col">Обновление</th>
+          <th scope="col">Удаление</th>
         </tr>
       </thead>
       <tbody class="table-group-divider">
@@ -24,7 +32,10 @@
             {{ genre }}
           {% endfor %}
           </td>
+          <td>{{book.num_of_reviews}}</td>
           <td>{{book.summary}}</td>
+          <td><a href="{% url 'core:book_update' pk=book.pk %}">Обновить</a></td>
+          <td><a href="{% url 'core:book_delete' pk=book.pk %}">Удалить</a></td>
         </tr>
       {% endfor %}
       </tbody>
