@@ -4,10 +4,11 @@
     <body>
     <h1> Список всех книг: {{count}}</h1>
     <form method="GET">
-        {{ form }}
-        <button type="submit">Поиск</button>
+        {{ filter.form.name.label }}<br>{{ filter.form.name }}
+        <br>{{ filter.form.count.label }}<br>{{ filter.form.count }}
+        <br><br><button type="submit">Поиск</button>
     </form>
-    <h6>Примечание для поиска: оба поля должны быть заполнены!</h6>
+    <h6>Примечание для поиска: все поля должны быть заполнены!</h6>
     <table class="table">
       <thead>
         <tr>
@@ -17,6 +18,9 @@
           <th scope="col">Жанр</th>
           <th scope="col">Кол-во рецензий критиков</th>
           <th scope="col">Краткое описание</th>
+          {% if request.user.is_superuser %}
+            <th scope="col">Активна ли книга?</th>
+          {% endif %}
           <th scope="col">Обновление</th>
           <th scope="col">Удаление</th>
         </tr>
@@ -34,8 +38,15 @@
           </td>
           <td>{{book.num_of_reviews}}</td>
           <td>{{book.summary}}</td>
+          {% if request.user.is_superuser %}
+            <td>{{ book.is_active|yesno:"Да, Нет" }}</td>
+          {% endif %}
           <td><a href="{% url 'core:book_update' pk=book.pk %}">Обновить</a></td>
           <td><a href="{% url 'core:book_delete' pk=book.pk %}">Удалить</a></td>
+        </tr>
+      {% empty %}
+        <tr>
+            <td> Список пуст </td>>
         </tr>
       {% endfor %}
       </tbody>

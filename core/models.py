@@ -13,9 +13,10 @@ class Genre(models.Model):
 class Book(models.Model):
     title = models.CharField(max_length=255)
     author = models.ForeignKey('Author', on_delete=models.SET_NULL, null=True)
-    summary = models.TextField(max_length=2550)
     genre = models.ManyToManyField(Genre)
-    num_of_reviews = models.IntegerField(max_length=255)
+    num_of_reviews = models.IntegerField(blank=True, null=True)
+    summary = models.TextField(max_length=2550)
+    is_active = models.BooleanField(default=True)
 
     def __str__(self):
         return self.title

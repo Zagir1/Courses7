@@ -2,7 +2,7 @@ from django.db.models import Q
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from core import models, forms
+from core import models, forms, filters
 
 
 class TitleMixin:
@@ -27,17 +27,20 @@ class BookList(TitleMixin, ListView):
     context_object_name = 'book'
     title = 'Книги'
 
+    def get_filters(self):
+        return filters.BookFilter(self.request.GET)
+
     def get_queryset(self):
-        title = self.request.GET.get('title')
-        num_of_reviews = self.request.GET.get('num_of_reviews')
-        qs = models.Book.objects.all()
-        if title or num_of_reviews:
-            return qs.filter(Q(title__icontains=title) | Q(num_of_reviews=num_of_reviews))
-        return qs
+        # title = self.request.GET.get('title')
+        # num_of_reviews = self.request.GET.get('num_of_reviews')
+        # qs = models.Book.objects.all()
+        # if title or num_of_reviews:
+        #     return qs.filter(Q(title__icontains=title) | Q(num_of_reviews=num_of_reviews))
+        return self.get_filters().qs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['form'] = forms.BookSearch(self.request.GET or None)
+        context['filter'] = self.get_filters()
         context['count'] = self.get_queryset().count()
         return context
 
