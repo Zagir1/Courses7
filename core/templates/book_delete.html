@@ -4,7 +4,7 @@
         {% csrf_token %}
         <p>Вы уверены, что хотите удалить "{{ object }}"?</p>
         {{ form.as_p }}
-        <button type="submit" value="Confirm">Удалить</button>
-        <button type="reset" onclick="href="{% url 'core:book_list' %}"">Отмена</button>
+        <button type="submit" class="btn btn-danger" value="Confirm">Удалить</button>
+        <a class="btn btn-success" href="{% url 'core:book_list' %}"  role="button">Отмена</a>
     </form>
 {% endblock %}
