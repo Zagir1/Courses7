@@ -31,7 +31,6 @@ class BookForm(forms.ModelForm):
             raise forms.ValidationError('Название не должно являться числом!')
         return name
 
-
     class Meta:
         model = models.Book
         fields = "__all__"
