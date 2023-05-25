@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
-    <form action="{% url 'core:book_create' %}" method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Добавить</button>
-    </form>
+    <body>
+        <form action="{% url 'core:book_create' %}" method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Добавить</button>
+        </form>
+    </body>>
 {% endblock %}
